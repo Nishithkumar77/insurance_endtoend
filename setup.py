@@ -17,7 +17,7 @@ def get_requirements()->List[str]:
 
 setup(name='Insurance',
       version='0.0.1',
-      description='Insurance Industry lavel project',
+      description='Insurance Industry level project',
       author='Nishith Kumar',
       author_email='nsahani99@gmail.com',
       packages=find_packages(),
