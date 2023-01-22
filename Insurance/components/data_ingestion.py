@@ -9,13 +9,13 @@ from Insurance.logger import logging
 from sklearn.model_selection import train_test_split
 
 class DataIngestion: # data divided train, test and split
-    def __init__(self,data_ingestion_config: config_entity.DataIngestionConfig):
+    def __init__(self,data_ingestion_config:config_entity.DataIngestionConfig):
         try:
             self.data_ingestion_config = data_ingestion_config
         except Exception as e:
             raise InsuranceException(e, sys)
 
-    def initiate_data_ingestion(self)-> artifact_entity.DataIngestionartifact:
+    def initiate_data_ingestion(self)->artifact_entity.DataIngestionartifact:
         try:
             logging.info(f"Export collection data as pandas dataframe")
             df:pd.DataFrame = utils.get_collections_as_dataframe(
@@ -50,6 +50,7 @@ class DataIngestion: # data divided train, test and split
                 train_file_path = self.data_ingestion_config.train_file_path,
                 test_file_path = self.data_ingestion_config.test_file_path
             )
+            return data_ingestion_artifact
 
         except Exception as e:
             raise InsuranceException(error_message = e, error_detail = sys)
