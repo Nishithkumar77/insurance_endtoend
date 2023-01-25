@@ -6,6 +6,8 @@ from datetime import datetime
 FILE_NAME = "insurance.csv"
 TRAIN_FILE_NAME ="train.csv"
 TEST_FILE_NAME = "test.csv"
+TRANSFORMATION_OBJECT_FILE_NAME = "transformer.pkl"
+TARGET_ENCODER_OBJECT_FILE_NAME = "target_encoder.pkl"
 
 class TrainingpipelineConfig:
     def __init__(self):
@@ -40,3 +42,28 @@ class DataValidationConfig:
         self.report_file_path = os.path.join(self.data_validation_dir, "report.yaml") #yml, json, csv
         self.missing_threshold:float = 0.2
         self.base_file_path = os.path.join("insurance.csv")
+
+class DataValidationConfig:
+    
+    def __init__(self, training_pipeline_config: TrainingpipelineConfig):
+        self.data_validation_dir = os.path.join(training_pipeline_config.artifact_dir, "data_validation")
+        self.report_file_path = os.path.join(self.data_validation_dir, "report.yaml") #yml, json, csv
+        self.missing_threshold:float = 0.2
+        self.base_file_path = os.path.join("insurance.csv")
+
+class DataTransformationConfig:
+
+    def __init__(self, training_pipeline_config: TrainingpipelineConfig):
+        self.data_transformation_dir = os.path.join(training_pipeline_config.artifact_dir, "data_transformation")
+        self.transform_object_path = os.path.join(self.data_transformation_dir, "transformed", TRANSFORMATION_OBJECT_FILE_NAME)
+        self.transform_train_path = os.path.join(self.data_transformation_dir, "transformed", TRAIN_FILE_NAME.replace("csv", "npz"))
+        self.transform_test_path = os.path.join(self.data_transformation_dir, "transformed", TEST_FILE_NAME.replace("csv", "npz"))
+        self.target_encoder_path = os.path.join(self.data_transformation_dir, "target_encoder", TARGET_ENCODER_OBJECT_FILE_NAME)
+
+
+
+        
+
+
+
+
